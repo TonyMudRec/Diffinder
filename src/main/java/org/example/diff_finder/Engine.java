@@ -47,7 +47,7 @@ public class Engine {
 
     public static StringBuilder getBuiltDifferences(Set<String> set1, String firstFileName, String secondFileName) {
         StringBuilder sb =
-                new StringBuilder("\n " + firstFileName + " contains packages which are not in " + secondFileName)
+                new StringBuilder("\n " + firstFileName + " contains that aren't in ".toUpperCase() + secondFileName)
                         .append(":\n");
         for (var line : set1) {
             sb.append("    ").append(line).append("\n");
@@ -63,13 +63,14 @@ public class Engine {
                 if (isSimilar(firstLine, secondLine)) {
                     partialMatches.add(firstLine);
                     partialMatches.add(secondLine);
-                    sb.append(sb.isEmpty() ? "\n version differences" : "");
-                    sb.append("    ")
-                            .append("\n")
+                    sb.append(sb.isEmpty() ? "\n version differences:".toUpperCase() : "");
+                    sb.append("\n")
+                            .append("    ")
                             .append(FIRST_FILE_NAME)
                             .append(" - ")
                             .append(firstLine)
                             .append("\n")
+                            .append("    ")
                             .append(SECOND_FILE_NAME)
                             .append(" - ")
                             .append(secondLine);
@@ -84,8 +85,16 @@ public class Engine {
     }
 
     public static boolean isSimilar(String s1, String s2) {
-        Pattern pattern = Pattern.compile("[\\w-]*\\.}");
-        return pattern.matcher(s1).toString().equals(pattern.matcher(s2).toString());
+        var pattern = Pattern.compile("^[\\w-]*?\\.");
+        var matcher1 = pattern.matcher(s1);
+        var matcher2 = pattern.matcher(s2);
+        var subString1 = new String();
+        var subString2 = new String();
+        if (matcher1.find() && matcher2.find()) {
+            subString1 = matcher1.group();
+            subString2 = matcher2.group();
+        }
+        return subString1.equals(subString2);
     }
 
     public static String buildResult(Set<String> set1, Set<String> set2) {
