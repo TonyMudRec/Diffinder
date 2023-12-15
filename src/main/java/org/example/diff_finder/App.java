@@ -6,7 +6,7 @@ import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name = "DifFinder",
-        version = "1.0",
+        version = "1.3",
         mixinStandardHelpOptions = true,
         description = "Compares two files and shows a differences.")
 public class App implements Callable {
