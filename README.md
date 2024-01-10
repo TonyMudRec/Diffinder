@@ -9,7 +9,7 @@ A utility that compares two files and returns how they differ. Analog of the "Di
 
 **Example:**
 ```bash
-# ./giffinder.sh ~/815.txt ~/817.txt
+# ./diffinder.sh ~/815.txt ~/817.txt
 
  VERSION DIFFERENCES:
     815.txt - solvo-devel-0.2.15-46.el8.x86_64
